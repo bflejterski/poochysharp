@@ -22,30 +22,39 @@
 //   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //   THE SOFTWARE.
 // </copyright>
+// <summary>
+//   Utility class for reading keys from app.config using generics.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Linq;
-
 namespace Utils
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Configuration;
+    using System.Linq;
+
     /// <summary>
     ///     Utility class for reading keys from app.config using generics.
     /// </summary>
     public static class Config
     {
-        #region Public Methods and Operators
+        #region Public Properties
 
         /// <summary>
-        /// Gets the all keys from
+        ///     Gets the all keys from
         /// </summary>
         public static IEnumerable<string> AllKeys
         {
-            get { return ConfigurationManager.AppSettings.AllKeys; }
+            get
+            {
+                return ConfigurationManager.AppSettings.AllKeys;
+            }
         }
+
+        #endregion
+
+        #region Public Methods and Operators
 
         /// <summary>
         /// Gets key from app.config converted to the given type
@@ -73,24 +82,25 @@ namespace Utils
 
             if (!ConfigurationManager.AppSettings.AllKeys.Contains(key))
             {
-                throw new UtilsException(string.Format("Key [{0}] has not been found in the configuration file.", key));
+                throw new PoochyUtilsException(
+                    string.Format("Key [{0}] has not been found in the configuration file.", key));
             }
 
             try
             {
                 object convertFrom =
-                    TypeDescriptor.GetConverter(typeof (T)).ConvertFrom(ConfigurationManager.AppSettings[key]);
+                    TypeDescriptor.GetConverter(typeof(T)).ConvertFrom(ConfigurationManager.AppSettings[key]);
                 if (convertFrom != null)
                 {
-                    return (T) convertFrom;
+                    return (T)convertFrom;
                 }
             }
             catch (NotSupportedException e)
             {
-                throw new UtilsException(string.Format("There's no default converter for [{0}].", typeof(T)), e);
+                throw new PoochyUtilsException(string.Format("There's no default converter for [{0}].", typeof(T)), e);
             }
 
-            throw new UtilsException(string.Format("There's no default converter for [{0}].", typeof (T)));
+            throw new PoochyUtilsException(string.Format("There's no default converter for [{0}].", typeof(T)));
         }
 
         #endregion

@@ -22,28 +22,34 @@
 //   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //   THE SOFTWARE.
 // </copyright>
+// <summary>
+//   The config tests.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NFluent;
-
 namespace Utils.Test
 {
+    using System.Collections.Generic;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using NFluent;
+
     /// <summary>
     ///     The config tests.
     /// </summary>
     [TestClass]
     public class ConfigTests
     {
+        #region Public Methods and Operators
+
         /// <summary>
-        ///     The test method 1.
+        ///     The read all keys test.
         /// </summary>
         [TestMethod]
-        public void ReadIntTest()
+        public void ReadAllKeysTest()
         {
-            var result = Config.ReadKey<int>("int");
-            Check.That(result).IsEqualTo(7);
+            IEnumerable<string> allKeys = Config.AllKeys;
+            Check.That(allKeys).ContainsExactly(new[] { "int", "double", "string" });
         }
 
         /// <summary>
@@ -57,6 +63,36 @@ namespace Utils.Test
         }
 
         /// <summary>
+        ///     The test method 1.
+        /// </summary>
+        [TestMethod]
+        public void ReadIntTest()
+        {
+            var result = Config.ReadKey<int>("int");
+            Check.That(result).IsEqualTo(7);
+        }
+
+        /// <summary>
+        ///     The read key with non existing converter type test.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(PoochyUtilsException))]
+        public void ReadKeyWithNonExistingConverterTypeTest()
+        {
+            Config.ReadKey<NonExistingConverterType>("string");
+        }
+
+        /// <summary>
+        ///     The read not existing key test.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(PoochyUtilsException))]
+        public void ReadNotExistingKeyTest()
+        {
+            Config.ReadKey<string>("notExistingKey");
+        }
+
+        /// <summary>
         ///     The read string test.
         /// </summary>
         [TestMethod]
@@ -66,39 +102,11 @@ namespace Utils.Test
             Check.That(result).IsEqualTo("test");
         }
 
-        /// <summary>
-        ///     The read all keys test.
-        /// </summary>
-        [TestMethod]
-        public void ReadAllKeysTest()
-        {
-            IEnumerable<string> allKeys = Config.AllKeys;
-            Check.That(allKeys).ContainsExactly(new[] {"int", "double", "string"});
-        }
-
-        /// <summary>
-        /// The read not existing key test.
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof (UtilsException))]
-        public void ReadNotExistingKeyTest()
-        {
-            Config.ReadKey<string>("notExistingKey");
-        }
-
-        /// <summary>
-        /// The read key with non existing converter type test.
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof (UtilsException))]
-        public void ReadKeyWithNonExistingConverterTypeTest()
-        {
-            Config.ReadKey<NonExistingConverterType>("string");
-        }
+        #endregion
     }
 
     /// <summary>
-    /// The non existing converter type class - used interally for testing.
+    ///     The non existing converter type class - used interally for testing.
     /// </summary>
     internal class NonExistingConverterType
     {

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="UtilsException.cs" company="Bartek Flejterski">
+// <copyright file="AssemblyInfo.cs" company="Bartek Flejterski">
 //   The MIT License (MIT)
 //   
 //   Copyright (c) 2014 Bartek Flejterski
@@ -23,42 +23,40 @@
 //   THE SOFTWARE.
 // </copyright>
 // <summary>
-//   The utils exception.
+//   AssemblyInfo.cs
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Reflection;
+using System.Runtime.InteropServices;
 
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+[assembly: AssemblyTitle("Common")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("Common")]
+[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
 
-using System;
+// Setting ComVisible to false makes the types in this assembly not visible 
+// to COM components.  If you need to access a type in this assembly from 
+// COM, set the ComVisible attribute to true on that type.
+[assembly: ComVisible(false)]
 
-namespace Utils
-{
-    /// <summary>
-    /// The utils exception.
-    /// </summary>
-    public class UtilsException : Exception
-    {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UtilsException"/> class.
-        /// </summary>
-        /// <param name="message">
-        /// The message.
-        /// </param>
-        public UtilsException(string message) : base(message)
-        {
-        }
+// The following GUID is for the ID of the typelib if this project is exposed to COM
+[assembly: Guid("945b0d2b-62ea-45f4-b340-9ebe3316f273")]
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UtilsException"/> class.
-        /// </summary>
-        /// <param name="message">
-        /// The message.
-        /// </param>
-        /// <param name="innerException">
-        /// The inner exception.
-        /// </param>
-        public UtilsException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
-    }
-}
+// Version information for an assembly consists of the following four values:
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+// You can specify all the values or you can default the Build and Revision Numbers 
+// by using the '*' as shown below:
+// [assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

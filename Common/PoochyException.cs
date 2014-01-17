@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="AssemblyInfo.cs" company="Bartek Flejterski">
+// <copyright file="PoochyException.cs" company="Bartek Flejterski">
 //   The MIT License (MIT)
 //   
 //   Copyright (c) 2014 Bartek Flejterski
@@ -23,40 +23,45 @@
 //   THE SOFTWARE.
 // </copyright>
 // <summary>
-//   AssemblyInfo.cs
+//   The poochy exception.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+namespace Common
+{
+    using System;
 
-using System.Reflection;
-using System.Runtime.InteropServices;
+    /// <summary>
+    ///     The poochy exception.
+    /// </summary>
+    public abstract class PoochyException : Exception
+    {
+        #region Constructors and Destructors
 
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-[assembly: AssemblyTitle("Utils")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Utils")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PoochyException"/> class.
+        /// </summary>
+        /// <param name="message">
+        /// The message.
+        /// </param>
+        protected PoochyException(string message)
+            : base(message)
+        {
+        }
 
-// Setting ComVisible to false makes the types in this assembly not visible 
-// to COM components.  If you need to access a type in this assembly from 
-// COM, set the ComVisible attribute to true on that type.
-[assembly: ComVisible(false)]
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PoochyException"/> class.
+        /// </summary>
+        /// <param name="message">
+        /// The message.
+        /// </param>
+        /// <param name="innException">
+        /// The inn exception.
+        /// </param>
+        protected PoochyException(string message, Exception innException)
+            : base(message, innException)
+        {
+        }
 
-// The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("7d4da9c4-18f3-4ec2-8210-725a5e03baf0")]
-
-// Version information for an assembly consists of the following four values:
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-// You can specify all the values or you can default the Build and Revision Numbers 
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+        #endregion
+    }
+}
