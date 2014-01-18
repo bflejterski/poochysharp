@@ -136,7 +136,7 @@ namespace Web
                         Encoding.UTF8.GetBytes(
                             string.Format(
                                 "Content-Disposition: form-data; name=\"{0}\"; filename=\"{1}\"{2}", 
-                                file.Name, 
+                                file.FieldName, 
                                 file.Name, 
                                 Environment.NewLine));
                     memoryStream.Write(buffer, 0, buffer.Length);

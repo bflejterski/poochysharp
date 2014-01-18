@@ -28,12 +28,19 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace Web
 {
+    using System;
+
     /// <summary>
     ///     The poochy file.
     /// </summary>
     public class PoochyFile
     {
         #region Public Properties
+
+        /// <summary>
+        ///     Used as a 'name' parameter of an input field when sending the request
+        /// </summary>
+        public String FieldName { get; set; }
 
         /// <summary>
         ///     Gets or sets the content.
